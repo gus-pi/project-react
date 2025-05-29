@@ -26,7 +26,7 @@ const ListingDetailsPage = () => {
         });
         setListing(response.data);
       } catch (error) {
-        if (useActionState.isCancel(error)) {
+        if (axios.isCancel(error)) {
           return;
         }
         setError('Something went wrong.');

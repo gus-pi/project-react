@@ -1,52 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
-
+import { useState } from 'react';
 import ListingFilters from '@/components/ListingFilters';
 import ListingList from '@/components/ListingList';
 import { Separator, Spinner } from '@/components/ui';
-import api from '@/api';
-import axios from 'axios';
+import useFetch from '@/hooks/useFetch';
 
 const HomePage = () => {
-  const [listings, setListings] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [filters, setFilters] = useState({
     dates: undefined,
     guests: 0,
     search: '',
   });
 
-  const abortController = useRef(null);
-
-  useEffect(() => {
-    const fetchListings = async () => {
-      setIsLoading(true);
-      setError(null);
-
-      abortController.current = new AbortController();
-
-      try {
-        const response = await api.get('/api/listings', {
-          params: filters,
-          signal: abortController.current?.signal,
-        });
-        setListings(response.data);
-      } catch (error) {
-        if (axios.isCancel(error)) {
-          return;
-        }
-        setError('Something went wrong. Please try again later.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchListings();
-
-    return () => {
-      abortController.current?.abort();
-    };
-  }, [filters]);
+  const {
+    data: listings,
+    error,
+    isLoading,
+  } = useFetch('/api/listings', { params: filters });
 
   const handleFilters = (filters) => {
     setFilters(filters);
