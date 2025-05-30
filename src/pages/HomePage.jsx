@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import ListingFilters from '@/components/ListingFilters';
 import ListingList from '@/components/ListingList';
@@ -25,9 +25,9 @@ const HomePage = () => {
     isLoading,
   } = useFetch('/api/listings', fetchOptions);
 
-  const handleFilters = (filters) => {
+  const handleFilters = useCallback((filters) => {
     setFilters(filters);
-  };
+  }, []);
 
   const renderListingList = () => {
     if (isLoading) {

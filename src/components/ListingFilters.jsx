@@ -1,6 +1,6 @@
 import { Search } from 'lucide-react';
 import { Button, DateRangePicker, Input, Stepper } from './ui';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
 const ListingFilters = ({ onChange }) => {
   const [dates, setDates] = useState();
@@ -32,4 +32,5 @@ const ListingFilters = ({ onChange }) => {
     </div>
   );
 };
-export default ListingFilters;
+
+export default memo(ListingFilters);
