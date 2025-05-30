@@ -1,46 +1,17 @@
-import api from '@/api';
 import ListingDetailsCard from '@/components/ListingDetailCard';
 import { Spinner } from '@/components/ui';
-import { useEffect, useRef, useState } from 'react';
+import useFetch from '@/hooks/useFetch';
+
 import { useParams } from 'react-router-dom';
 
 const ListingDetailsPage = () => {
   const { listingId } = useParams();
 
-  const [listing, setListing] = useState();
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const abortController = useRef(null);
-
-  useEffect(() => {
-    const fetchListing = async () => {
-      setIsLoading(true);
-      setError(null);
-
-      abortController.current = new AbortController();
-
-      try {
-        const response = await api.get(`/api/listings/${listingId}`, {
-          signal: abortController.current?.signal,
-        });
-        setListing(response.data);
-      } catch (error) {
-        if (axios.isCancel(error)) {
-          return;
-        }
-        setError('Something went wrong.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchListing();
-
-    return () => {
-      abortController.current?.abort();
-    };
-  }, [listingId]);
+  const {
+    data: listing,
+    error,
+    isLoading,
+  } = useFetch(`/api/listings/${listingId}`);
 
   const renderListing = () => {
     if (isLoading) {
