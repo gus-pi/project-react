@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import ListingFilters from '@/components/ListingFilters';
 import ListingList from '@/components/ListingList';
@@ -12,11 +12,18 @@ const HomePage = () => {
     search: '',
   });
 
+  const fetchOptions = useMemo(
+    () => ({
+      params: filters,
+    }),
+    filters,
+  );
+
   const {
     data: listings,
     error,
     isLoading,
-  } = useFetch('/api/listings', { params: filters });
+  } = useFetch('/api/listings', fetchOptions);
 
   const handleFilters = (filters) => {
     setFilters(filters);
