@@ -5,12 +5,16 @@ import ThemeProvider from '@/components/ThemeProvider';
 
 import './index.css';
 import Router from './Router';
+import { Provider } from 'react-redux';
+import { store } from './state/store';
 
 // DO NOT REMOVE: Seeds the local storage database with data
 seedLocalDatabase();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ThemeProvider>
-    <Router />
+    <Provider store={store}>
+      <Router />
+    </Provider>
   </ThemeProvider>,
 );
