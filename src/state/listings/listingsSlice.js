@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const initialState = {
   listings: [],
+  favoriteListingIds: [],
   error: null,
   status: 'idle',
 };
@@ -11,7 +12,16 @@ const initialState = {
 const listingsSlice = createSlice({
   name: 'listings',
   initialState,
-  reducers: {},
+  reducers: {
+    addFavoriteListing: (state, action) => {
+      state.favoriteListingIds.push(action.payload);
+    },
+    removeFavoriteListing: (state, action) => {
+      state.favoriteListingIds = state.favoriteListingIds.filter(
+        (id) => id !== action.payload,
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchListings.pending, (state) => {
@@ -39,5 +49,8 @@ export const fetchListings = createAsyncThunk(
     return response.data;
   },
 );
+
+export const { addFavoriteListing, removeFavoriteListing } =
+  listingsSlice.actions;
 
 export default listingsSlice.reducer;
