@@ -3,14 +3,13 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 const ListingFavoritesPage = () => {
-  const { listings, favoriteListingsIds } = useSelector(
+  const { listings, favoriteListingIds } = useSelector(
     (state) => state.listings,
   );
 
   const favoriteListings = useMemo(
-    () =>
-      listings.filter((listing) => favoriteListingsIds.includes(listing.id)),
-    [favoriteListingsIds, listings],
+    () => listings.filter((listing) => favoriteListingIds.includes(listing.id)),
+    [favoriteListingIds, listings],
   );
 
   return (
