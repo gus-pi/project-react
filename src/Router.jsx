@@ -5,6 +5,7 @@ import ListingDetailsPage from './pages/ListingDetailsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ListingFavoritesPage from './pages/ListingFavoritesPage';
 import SignInPage from './pages/SignInPage';
+import Route from './components/Route';
 
 const router = createBrowserRouter([
   {
@@ -14,19 +15,35 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/signin',
-        element: <SignInPage />,
+        element: (
+          <Route isProtected={false}>
+            <SignInPage />
+          </Route>
+        ),
       },
       {
         path: '/',
-        element: <HomePage />,
+        element: (
+          <Route isProtected={true}>
+            <HomePage />
+          </Route>
+        ),
       },
       {
         path: '/listings/:listingId',
-        element: <ListingDetailsPage />,
+        element: (
+          <Route isProtected={true}>
+            <ListingDetailsPage />
+          </Route>
+        ),
       },
       {
         path: '/favorites',
-        element: <ListingFavoritesPage />,
+        element: (
+          <Route isProtected={true}>
+            <ListingFavoritesPage />
+          </Route>
+        ),
       },
     ],
   },

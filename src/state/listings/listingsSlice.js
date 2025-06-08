@@ -32,12 +32,12 @@ const listingsSlice = createSlice({
         state.listings = action.payload;
       })
       .addCase(fetchListings.rejected, (state, action) => {
-        if (axios.isCancel(action.payload)) {
-          return;
-        }
+        const message = action.error.message;
 
-        state.status = 'failed';
-        state.error = action.payload.message;
+        if (message !== 'Aborted') {
+          state.status = 'failed';
+          state.error = message;
+        }
       });
   },
 });
