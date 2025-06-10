@@ -7,8 +7,8 @@ const App = () => {
   const { token } = useAuth();
   return (
     <>
-      <div className='fixed bottom-0 left-0 top-0'>{/* <Devbar /> */}</div>
-      <div className='ml-[700px]'>
+      {/* <div className='fixed bottom-0 left-0 top-0'> <Devbar /> </div> */}
+      <div className='flex items-center'>
         {token && <Navbar />}
         <Outlet />
       </div>
