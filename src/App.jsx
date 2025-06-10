@@ -1,4 +1,3 @@
-import Devbar from '@/components/Devbar/Devbar';
 import { Outlet } from 'react-router-dom';
 import Navbar from './components/NavBar';
 import { useAuth } from './components/AuthProvider';
