@@ -3,7 +3,7 @@ import { Spinner } from './ui';
 const DataRenderer = ({ children, error, isLoading }) => {
   if (isLoading) {
     return (
-      <div className='flex justify-center'>
+      <div className='flex items-center'>
         <Spinner size='sm' />
       </div>
     );

@@ -12,6 +12,8 @@ import {
   Input,
   Separator,
 } from '@/components/ui';
+import TextInput from './TextInput';
+import Form from './Form';
 
 const signInFormSchema = z.object({
   email: z.string().email(),
@@ -21,12 +23,7 @@ const signInFormSchema = z.object({
 const SignInForm = () => {
   const { setToken } = useAuth();
 
-  const {
-    formState: { errors, isSubmitting },
-    register,
-    handleSubmit,
-    setError,
-  } = useForm({
+  const form = useForm({
     resolver: zodResolver(signInFormSchema),
   });
 
@@ -35,7 +32,7 @@ const SignInForm = () => {
       const response = await api.post('/api/signin', data);
       setToken(response.data.accessToken);
     } catch (error) {
-      setError('root', { message: error.response.data.message });
+      form.setError('root', { message: error.response.data.message });
     }
   };
 
@@ -49,34 +46,21 @@ const SignInForm = () => {
         <Separator />
       </CardHeader>
       <CardContent>
-        <form className='flex flex-col gap-4'>
-          <div>
-            <Input {...register('email')} placeholder='name@example.com' />
-            {errors['email'] && (
-              <div className='mt-2 text-sm text-red-500'>
-                {errors['email'].message}
-              </div>
-            )}
-          </div>
+        <Form form={form}>
+          <TextInput
+            control={form.control}
+            name='email'
+            placeholder='name@example'
+          />
+          <TextInput control={form.control} name='password' type='password' />
 
-          <div>
-            <Input {...register('password')} type='password' />
-            {errors['password'] && (
-              <div className='mt-2 text-sm text-red-500'>
-                {errors['password'].message}
-              </div>
-            )}
-          </div>
-
-          <Button disabled={isSubmitting} onClick={handleSubmit(onSubmit)}>
-            {isSubmitting ? 'Loading...' : 'Sign In'}
+          <Button
+            disabled={form.formState.isSubmitting}
+            onClick={form.handleSubmit(onSubmit)}
+          >
+            {form.formState.isSubmitting ? 'Loading...' : 'Sign In'}
           </Button>
-          {errors.root && (
-            <div className='text-center text-sm text-red-500'>
-              {errors.root.message}
-            </div>
-          )}
-        </form>
+        </Form>
       </CardContent>
     </Card>
   );
