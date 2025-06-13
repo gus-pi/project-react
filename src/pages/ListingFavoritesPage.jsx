@@ -1,6 +1,7 @@
 import api from '@/api';
 import DataRenderer from '@/components/DataRenderer';
 import ListingList from '@/components/ListingList';
+import useListingsQuery from '@/hooks/queries/useListingsQuery';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
@@ -12,10 +13,7 @@ const ListingFavoritesPage = () => {
     data: { data: listings } = {},
     isError,
     isLoading,
-  } = useQuery({
-    queryKey: ['listings'],
-    queryFn: () => api.get('/api/listings'),
-  });
+  } = useListingsQuery();
 
   const favoriteListings = useMemo(() => {
     if (!listings) {

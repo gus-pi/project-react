@@ -1,7 +1,6 @@
-import api from '@/api';
 import DataRenderer from '@/components/DataRenderer';
 import ListingDetailsCard from '@/components/ListingDetailCard';
-import { useQuery } from '@tanstack/react-query';
+import useListingsDetailsQuery from '@/hooks/queries/useListingDetailsQuery';
 import { useParams } from 'react-router-dom';
 
 const ListingDetailsPage = () => {
@@ -11,10 +10,7 @@ const ListingDetailsPage = () => {
     data: { data: listing } = {},
     error,
     isLoading,
-  } = useQuery({
-    queryKey: ['listing', listingId],
-    queryFn: () => api.get(`/api/listings/${listingId}`),
-  });
+  } = useListingsDetailsQuery(listingId);
 
   return (
     <div className='container py-4'>
