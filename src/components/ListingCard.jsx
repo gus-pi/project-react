@@ -1,10 +1,15 @@
 import { DollarSign, Pin, Users } from 'lucide-react';
-import { Card, CardContent } from './ui';
+import { Card, CardContent, Separator } from './ui';
 import ListingCardImages from './ListingCardImages';
 import { Link } from 'react-router-dom';
 import ListingFavoriteButton from './ListingFavoriteButton';
+import { useSelector } from 'react-redux';
+import { UserAvatar } from './UserAvatar';
 
 const ListingCard = ({ listing }) => {
+  const { users } = useSelector((state) => state.users);
+  const listingUser = users[listing.userId];
+
   return (
     <Link to={`/listings/${listing.id}`}>
       <Card className='w-[320px]'>
@@ -36,6 +41,12 @@ const ListingCard = ({ listing }) => {
               {listing.maxGuests} Guests
             </span>
           </div>
+          {listingUser && (
+            <>
+              <Separator className='my-4' />
+              <UserAvatar user={listingUser} />
+            </>
+          )}
         </CardContent>
       </Card>
     </Link>

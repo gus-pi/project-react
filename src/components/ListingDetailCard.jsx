@@ -3,8 +3,12 @@ import { DollarSign, Pin, Users } from 'lucide-react';
 import { Card, Separator } from '@/components/ui';
 import ListingDetailsCardImages from './ListingDetailsCardImages';
 import ListingFavoriteButton from './ListingFavoriteButton';
+import { useSelector } from 'react-redux';
+import { UserAvatar } from './UserAvatar';
 
 const ListingDetailsCard = ({ listing }) => {
+  const { users } = useSelector((state) => state.users);
+  const listingUser = users[listing.userId];
   return (
     <Card className='mx-auto p-4'>
       <ListingDetailsCardImages listing={listing} />
@@ -35,6 +39,12 @@ const ListingDetailsCard = ({ listing }) => {
         <ListingFavoriteButton listing={listing} />
       </div>
       <Separator className='my-4' />
+      {listingUser && (
+        <>
+          <UserAvatar user={listingUser} />
+          <Separator className='my-4' />
+        </>
+      )}
       <div className='whitespace-pre-line'>{listing.description}</div>
     </Card>
   );
