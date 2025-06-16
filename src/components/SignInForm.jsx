@@ -20,7 +20,7 @@ const signInFormSchema = z.object({
 });
 
 const SignInForm = () => {
-  const { setToken } = useAuth();
+  const { setToken, setUser } = useAuth();
 
   const form = useForm({
     resolver: zodResolver(signInFormSchema),
@@ -32,6 +32,7 @@ const SignInForm = () => {
     try {
       const response = await signInMutation.mutateAsync(data);
       setToken(response.data.accessToken);
+      setUser(response.data.user);
     } catch (error) {
       form.setError('root', { message: error.response.data.message });
     }

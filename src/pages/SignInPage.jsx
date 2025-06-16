@@ -4,14 +4,14 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SignInPage = () => {
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (token) {
+    if (token && user) {
       navigate('/', { replace: true });
     }
-  }, [navigate, token]);
+  }, [navigate, token, user]);
 
   return (
     <div className='container flex h-screen items-center justify-center py-4'>

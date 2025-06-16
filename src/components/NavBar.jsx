@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import api from '@/api';
 import { useAuth } from '@/components/AuthProvider';
 import {
   DropdownMenu,
@@ -12,7 +11,7 @@ import {
 import useSignOutMutation from '@/hooks/mutations/useSignOutMutation';
 
 const Navbar = () => {
-  const { setToken } = useAuth();
+  const { setToken, setUser } = useAuth();
 
   const signOutMutation = useSignOutMutation();
 
@@ -21,8 +20,10 @@ const Navbar = () => {
       await signOutMutation.mutateAsync();
 
       setToken(null);
+      setUser(null);
     } catch {
       setToken(null);
+      setUser(null);
     }
   };
 
