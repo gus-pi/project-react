@@ -6,6 +6,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import ListingFavoritesPage from './pages/ListingFavoritesPage';
 import SignInPage from './pages/SignInPage';
 import Route from './components/Route';
+import ProfilePage from './pages/ProfilePage';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,14 @@ const router = createBrowserRouter([
         element: (
           <Route isProtected={true}>
             <ListingFavoritesPage />
+          </Route>
+        ),
+      },
+      {
+        path: '/profile',
+        element: (
+          <Route isProtected={true}>
+            <ProfilePage />
           </Route>
         ),
       },
