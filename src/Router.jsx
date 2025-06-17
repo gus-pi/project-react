@@ -7,6 +7,7 @@ import ListingFavoritesPage from './pages/ListingFavoritesPage';
 import SignInPage from './pages/SignInPage';
 import Route from './components/Route';
 import ProfilePage from './pages/ProfilePage';
+import CreateListingPage from './pages/CreateListingPage';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: '/listings/:create',
+        element: (
+          <Route isProtected={true}>
+            <CreateListingPage />
+          </Route>
+        ),
+      },
+      {
         path: '/listings/:listingId',
         element: (
           <Route isProtected={true}>
@@ -38,6 +47,7 @@ const router = createBrowserRouter([
           </Route>
         ),
       },
+
       {
         path: '/favorites',
         element: (
