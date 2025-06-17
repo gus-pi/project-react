@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/listings/:create',
+        path: '/listings/create',
         element: (
           <Route isProtected={true}>
             <CreateListingPage />
