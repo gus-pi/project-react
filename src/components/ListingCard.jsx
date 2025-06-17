@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import ListingFavoriteButton from './ListingFavoriteButton';
 import { useSelector } from 'react-redux';
 import { UserAvatar } from './UserAvatar';
+import ListingRatingStars from './ListingRatingStars';
 
 const ListingCard = ({ listing }) => {
   const { users } = useSelector((state) => state.users);
@@ -18,6 +19,10 @@ const ListingCard = ({ listing }) => {
           <ListingFavoriteButton
             listing={listing}
             className='absolute right-4 top-4'
+          />
+          <ListingRatingStars
+            listing={listing}
+            className='absoluteleft-4 bottom-4'
           />
         </div>
         <CardContent className='flex flex-col gap-2 p-4'>
