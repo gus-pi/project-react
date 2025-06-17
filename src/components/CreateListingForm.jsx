@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { Card, CardContent, CardHeader, Separator } from './ui';
+import { Button, Card, CardContent, CardHeader, Separator } from './ui';
 import Form from './Form';
 import TextInput from './TextInput';
 import SelectInput from './SelectInput';
@@ -22,16 +22,16 @@ const createListingFormSchema = z.object({
     })
     .min(1),
   maxGuests: z.number().min(1),
-  availabitly: z.object({
+  availability: z.object({
     from: z.date(),
     to: z.date(),
   }),
 });
 
-const createListingMutation = useCreateListingMutation();
-
 const CreateListingForm = () => {
   const navigate = useNavigate();
+
+  const createListingMutation = useCreateListingMutation();
 
   const form = useForm({
     resolver: zodResolver(createListingFormSchema),
@@ -44,20 +44,20 @@ const CreateListingForm = () => {
     try {
       const response = await createListingMutation.mutateAsync(data);
       navigate(`/listings/${response.data.id}`);
-    } catch (error) {
+    } catch (e) {
       form.setError('root', {
-        message: error.reponse.data.message,
+        message: e.response.data.message,
       });
     }
   };
 
   const locationOptions = [
-    { value: '1', label: 'Paris' },
-    { value: '2', label: 'London' },
+    { value: '1', label: 'London' },
+    { value: '2', label: 'Paris' },
   ];
 
   return (
-    <Card classname='mx-auto w-[800px]'>
+    <Card className='mx-auto w-[800px]'>
       <CardHeader>
         <h2 className='text-center text-2xl'>Create Listing</h2>
         <p className='text-center text-muted-foreground'>
@@ -80,7 +80,7 @@ const CreateListingForm = () => {
           />
           <SelectInput
             control={form.control}
-            name='location'
+            name='locationId'
             options={locationOptions}
             placeholder='Select a location'
           />
@@ -101,6 +101,12 @@ const CreateListingForm = () => {
             placeholder='Select availabity'
             minDate={new Date()}
           />
+          <Button
+            disabled={createListingMutation.isPending}
+            onClick={form.handleSubmit(onSubmit)}
+          >
+            {createListingMutation.isPending ? 'Loading...' : 'Create Listing'}
+          </Button>
         </Form>
       </CardContent>
     </Card>
