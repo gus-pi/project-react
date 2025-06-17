@@ -22,7 +22,7 @@ const ListingCard = ({ listing }) => {
           />
           <ListingRatingStars
             listing={listing}
-            className='absoluteleft-4 bottom-4'
+            className='absolute bottom-4 left-4'
           />
         </div>
         <CardContent className='flex flex-col gap-2 p-4'>
