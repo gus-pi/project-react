@@ -5,6 +5,7 @@ import ListingDetailsCardImages from './ListingDetailsCardImages';
 import ListingFavoriteButton from './ListingFavoriteButton';
 import { useSelector } from 'react-redux';
 import { UserAvatar } from './UserAvatar';
+import ListingRatingStars from './ListingRatingStars';
 
 const ListingDetailsCard = ({ listing }) => {
   const { users } = useSelector((state) => state.users);
@@ -36,7 +37,13 @@ const ListingDetailsCard = ({ listing }) => {
             </span>
           </div>
         </div>
-        <ListingFavoriteButton listing={listing} />
+        <div>
+          <ListingRatingStars
+            className='mr-2 bg-transparent px-0 py-0'
+            listing={listing}
+          />
+          <ListingFavoriteButton listing={listing} />
+        </div>
       </div>
       <Separator className='my-4' />
       {listingUser && (
