@@ -9,7 +9,7 @@ const ReviewCard = ({ review }) => {
   const reviewUser = users[review.userId];
 
   return (
-    <Card>
+    <Card className='pt-4'>
       <CardContent>
         <div className='mb-4 flex flex-row items-center justify-between'>
           <h3 className='mb-0'>{review.title}</h3>

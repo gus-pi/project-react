@@ -17,7 +17,6 @@ const ReviewCardStars = ({ className, review }) => {
           })}
         />
       ))}
-      <span className='ml-2'>{review.rating}</span>
     </div>
   );
 };

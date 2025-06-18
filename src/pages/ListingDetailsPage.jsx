@@ -1,5 +1,6 @@
 import DataRenderer from '@/components/DataRenderer';
 import ListingDetailsCard from '@/components/ListingDetailCard';
+import ReviewsList from '@/components/ReviewsList';
 import useListingsDetailsQuery from '@/hooks/queries/useListingDetailsQuery';
 import useListingReviewsQuery from '@/hooks/queries/useListingReviewsQuery';
 import { useParams } from 'react-router-dom';
@@ -21,9 +22,19 @@ const ListingDetailsPage = () => {
 
   return (
     <div className='container py-4'>
-      <DataRenderer error={error} isLoading={isLoading}>
-        <ListingDetailsCard listing={listing} />
-      </DataRenderer>
+      <div className='mb-8'>
+        <DataRenderer error={error} isLoading={isLoading}>
+          <ListingDetailsCard listing={listing} />
+        </DataRenderer>
+      </div>
+      {listing && (
+        <div>
+          <h2 className='mb-4'>Reviews</h2>
+          <DataRenderer error={reviewsError} isLoading={isReviewsLoading}>
+            <ReviewsList reviews={reviews} />
+          </DataRenderer>
+        </div>
+      )}
     </div>
   );
 };
