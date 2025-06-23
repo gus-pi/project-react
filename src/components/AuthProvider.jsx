@@ -81,8 +81,8 @@ const AuthProvider = ({ children }) => {
         const originalRequest = error.config;
 
         if (
-          error.response.status === 403 &&
-          error.response.data.message === 'Unauthorized'
+          error.response?.status === 403 &&
+          error.response?.data?.message === 'Unauthorized'
         ) {
           try {
             const response = await api.get('/api/refreshToken');

@@ -1,5 +1,5 @@
 describe('template spec', () => {
-  it('passes', () => {
-    cy.visit('https://example.cypress.io')
-  })
-})
+  it('renders the home page with expected data', () => {
+    cy.login('demo@cosdensolutions.io', 'cosdensolutions');
+  });
+});

@@ -31,10 +31,14 @@ const SignInForm = () => {
   const onSubmit = async (data) => {
     try {
       const response = await signInMutation.mutateAsync(data);
+
       setToken(response.data.accessToken);
       setUser(response.data.user);
     } catch (error) {
-      form.setError('root', { message: error.response.data.message });
+      form.setError('root', {
+        message:
+          error.response?.data?.message || error.message || 'Sign in failed',
+      });
     }
   };
 
