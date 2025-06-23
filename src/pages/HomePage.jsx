@@ -25,7 +25,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className='container py-4'>
+    <div className='container py-4' data-testid='homepage'>
       <div className='mb-4'>
         <ListingFilters onChange={handleFilters} />
         <Separator className='my-4' />
