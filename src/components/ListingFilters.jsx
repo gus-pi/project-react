@@ -19,6 +19,7 @@ const ListingFilters = ({ onChange }) => {
       <Input
         className='w-[400px]'
         placeholder='Search destinations'
+        name='search'
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
@@ -29,7 +30,7 @@ const ListingFilters = ({ onChange }) => {
         minDate={new Date()}
       />
       <Stepper label='guest' value={guests} onChange={setGuests} />
-      <Button onClick={handleSubmit}>
+      <Button onClick={handleSubmit} data-testid='listing-filters-submit'>
         <Search className='h-4 w-4' />
       </Button>
     </div>
