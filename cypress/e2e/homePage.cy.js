@@ -6,7 +6,9 @@ describe('template spec', () => {
 
     cy.visit('http://localhost:5173/');
   });
-  it('renders the home page with expected data', () => {
+  it('renders the home page with expected elements', () => {
     cy.get('[data-testid="homepage"]').should('exist');
+    cy.get('[data-testid="listing-filters"]').should('exist');
+    cy.get('[data-testid="listing-list"]').should('exist');
   });
 });
